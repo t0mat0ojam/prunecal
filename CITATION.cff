@@ -7,7 +7,7 @@ authors:
     given-names: "Tomoharu"
 version: 0.1.0
 date-released: "2026-08-22"
-url: "https://github.com/USER/prunecal"
+url: "https://github.com/t0mat0ojam/prunecal"
 preferred-citation:
   type: report
   title: "マイクロコントローラ上で動作する較正不要脳波デコーダの圧縮パイプラインの提案 (Compression pipeline for a calibration-free EEG decoder running on a microcontroller)"
