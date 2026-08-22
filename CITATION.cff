@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "prunecal: prune, probe, recalibrate — a calibration-free compression pipeline for EEG decoders"
+authors:
+  - family-names: "Hayakawa"
+    given-names: "Tomoharu"
+version: 0.1.0
+date-released: "2026-08-22"
+url: "https://github.com/USER/prunecal"
+preferred-citation:
+  type: report
+  title: "マイクロコントローラ上で動作する較正不要脳波デコーダの圧縮パイプラインの提案 (Compression pipeline for a calibration-free EEG decoder running on a microcontroller)"
+  authors:
+    - family-names: "Hayakawa"
+      given-names: "Tomoharu"
+  year: 2026
+  institution:
+    name: "Hiroo Gakuen High School / NII 情報科学の達人 (JST STELLA)"
