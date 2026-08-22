@@ -11,9 +11,9 @@ This is the reference implementation of the method described in the research rep
 ## Install
 
 ```bash
-pip install git+https://github.com/USER/prunecal.git
+pip install git+https://github.com/t0mat0ojam/prunecal.git
 # or, for development:
-git clone https://github.com/USER/prunecal.git && cd prunecal && pip install -e ".[test]"
+git clone https://github.com/t0mat0ojam/prunecal.git && cd prunecal && pip install -e ".[test]"
 ```
 
 Dependencies: `torch`, `torch-pruning`, `numpy`. Pruning dependencies (which downstream channels a filter removal deletes) are resolved by torch-pruning's dependency graph where its result validates, with an exact built-in propagation engine for sequential chains as the fallback — torch-pruning 1.6 mishandles grouped convolutions with a depth multiplier, which is precisely EEGNet's spatial convolution, so the fallback is what handles EEGNet itself (covered by tests).
