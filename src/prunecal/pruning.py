@@ -106,7 +106,7 @@ def compress(
     layer: Optional[LayerRef] = None,
     budget: Optional[float] = None,
     ratio: Optional[float] = None,
-    criterion: str = "discriminability",
+    criterion="discriminability",
     example_input: Optional[torch.Tensor] = None,
     generator: Optional[torch.Generator] = None,
 ):
@@ -167,7 +167,12 @@ def compress(
     layer_module = dict(model.named_modules())[layer_name]
     n_filters = layer_module.weight.shape[0]
 
-    if criterion == "discriminability":
+    if callable(criterion):
+        scores = torch.as_tensor(
+            criterion(model, resolve_layer(model, layer)[1], data, labels),
+            dtype=torch.float32)
+        criterion_name = getattr(criterion, "__name__", "custom")
+    elif criterion == "discriminability":
         if data is None or labels is None:
             raise ValueError("criterion='discriminability' needs `data` and `labels`.")
         scores = discriminability_scores(model, layer_name, data, labels)
@@ -177,6 +182,8 @@ def compress(
         scores = random_scores(model, layer_name, generator=generator)
     else:
         raise ValueError(f"Unknown criterion {criterion!r}.")
+    if not callable(criterion):
+        criterion_name = criterion
 
     macs_before, _ = count_macs(model, example_input)
     if ratio is not None:
@@ -213,7 +220,7 @@ def compress(
     probe_result = probe(model, layer_name, example_input)
     report = CompressionReport(
         layer=layer_name,
-        criterion=criterion,
+        criterion=criterion_name,
         kept=kept_idx,
         pruned=pruned_idx,
         macs_before=macs_before,
